@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util;
 
@@ -54,8 +54,6 @@ import com.fraudwall.util.io.IOUtils;
  * ".tmpl". Lines that start with the literal string "-- param" in the template
  * file are ignored. By convention, parameter names begin with a "$" character,
  * but this class does not require that.<p>
- *
- * This class is based off the "fwpysql.py" Python implementation.
  *
  * @author ryan
  */
