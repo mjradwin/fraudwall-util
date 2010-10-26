@@ -1,0 +1,15 @@
+<body>
+Defines a special kind of checksum called a <em>fingerprint</em>. Unlike cryptographic
+hash functions like <a href="http://en.wikipedia.org/wiki/MD5">MD5</a> and
+<a href="http://en.wikipedia.org/wiki/SHA1">SHA-1</a>, which were designed to
+withstand cryptographic attacks, the fingerprint function was explicitly designed
+to produce a checksum unique to the text from which it was generated.<p>
+
+In particular, there is a mathematical formula that places an upper bound on the
+probability of two randomly chosen (distinct) strings hashing to the same fingerprint.
+By choosing a large enough fingerprint, the probability of a collision can be made
+vanishingly small. Hence, the fingerprint of a text <em>T</em> can be used as a
+fixed-size unique identifier for <em>T</em>.
+
+@author Allan Heydon
+</body>
