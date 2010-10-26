@@ -30,7 +30,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-package com.fraudwall.util;
+package com.fraudwall.util.date;
 
 import java.io.File;
 import java.sql.Timestamp;
@@ -45,7 +45,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 
-import com.fraudwall.util.date.AnchorDateFormat;
+import com.fraudwall.util.AnchorFatalError;
 
 /**
  * Defines various utility methods useful for parsing, formatting,

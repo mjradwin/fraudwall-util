@@ -42,8 +42,8 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.Date;
 
-import com.fraudwall.util.ThreadSafeDateFormat;
 import com.fraudwall.util.date.AnchorDateFormat;
+import com.fraudwall.util.date.ThreadSafeDateFormat;
 
 /**
  * Provides a thin wrapper on top of a {@link ResultSet} that adds getDate(),

@@ -30,14 +30,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-package com.fraudwall.util;
+package com.fraudwall.util.date;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.TimeZone;
 
-import com.fraudwall.util.date.AnchorDateFormat;
 
 /**
  * Wrapper for an {@link AnchorDateFormat} whose parse and format methods are

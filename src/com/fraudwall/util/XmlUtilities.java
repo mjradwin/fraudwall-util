@@ -62,6 +62,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import com.fraudwall.util.date.SmartDateParser;
+
 public class XmlUtilities {
 
 	public static final String UNKNOWN_STRING = null;

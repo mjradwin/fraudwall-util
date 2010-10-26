@@ -36,7 +36,6 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 import com.fraudwall.util.ArgCheck;
-import com.fraudwall.util.ThreadSafeDateFormat;
 
 /**
  * Simple sub-class of {@link SimpleDateFormat} that always does strict

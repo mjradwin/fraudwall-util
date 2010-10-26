@@ -28,9 +28,9 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
-package com.fraudwall.util;
+package com.fraudwall.util.date;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -39,7 +39,12 @@ import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.impl.NoOpLog;
 
+import com.fraudwall.util.AbstractAnchorTest;
+import com.fraudwall.util.date.SmartDateParser;
 
+/**
+ * Tests the {@link SmartDateParser} implementation.
+ */
 public class SmartDateParserTest extends AbstractAnchorTest {
 
 	// ------------------------------------- parseDate

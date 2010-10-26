@@ -28,9 +28,9 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
-package com.fraudwall.util;
+package com.fraudwall.util.date;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -46,13 +46,16 @@ import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fraudwall.util.AnchorFatalError;
+import com.fraudwall.util.ArgCheck;
+
 /**
- * Smart Date Parser v0.01.  Attempts to parse a random date string.
+ * Parses date and date/time strings in a variety of common formats.
  * @author kfox
  */
 public class SmartDateParser {
 
-	/*test*/ static Log log = LogFactory.getLog(SmartDateParser.class);
+	public static Log log = LogFactory.getLog(SmartDateParser.class);
 
 	public static final long UNKNOWN_TIME = 0L;
 
@@ -110,10 +113,10 @@ public class SmartDateParser {
 		addDateFormat("[A-Za-z]+, [A-Za-z]+ \\d?\\d, \\d{4}", "EEE, MMM dd, yyyy");
 		// Tue, 17 Feb 2009 19:00:31 EST
 		addDateFormat("[A-Za-z]+, \\d?\\d [A-Za-z]+ \\d{4} \\d{1,2}:\\d{1,2}:\\d{1,2} [A-Za-z]{3}",
-					  "EEE, dd MMM yyyy HH:mm:ss Z");
+					"EEE, dd MMM yyyy HH:mm:ss Z");
 		// Tue Jan 12 23:59:59 GMT 2010
 		addDateFormat("[A-Za-z]+ [A-Za-z]+ \\d?\\d \\d{1,2}:\\d{1,2}:\\d{1,2} [A-Za-z]{3} \\d{4}",
-					  "EEE MMM dd HH:mm:ss Z yyyy");
+					"EEE MMM dd HH:mm:ss Z yyyy");
 		// 2017-04-14 18:36:57 UTC
 		addDateFormat("\\d{4}-\\d?\\d-\\d?\\d \\d{1,2}:\\d{1,2}:\\d{1,2} [A-Za-z]{3}", "yyyy-MM-dd HH:mm:ss Z");
 		// 2017-04-14 18:36:57

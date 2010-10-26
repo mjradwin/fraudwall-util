@@ -36,6 +36,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.fraudwall.util.date.DateTimeUtilsTest;
+import com.fraudwall.util.date.SmartDateParserTest;
 import com.fraudwall.util.db.AnchorResultSetTest;
 import com.fraudwall.util.db.ConnectionPoolTest;
 import com.fraudwall.util.db.DBConnectionUtilsTest;

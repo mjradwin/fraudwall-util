@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util;
 
@@ -50,6 +50,8 @@ import org.xml.sax.SAXException;
 
 import com.fraudwall.util.XmlUtilities.UrlInputStream;
 import com.fraudwall.util.XmlUtilities.UrlInputStreamResult;
+import com.fraudwall.util.date.SmartDateParser;
+import com.fraudwall.util.date.SmartDateParserTest;
 
 public class XmlUtilitiesTest extends AbstractAnchorTest {
 
