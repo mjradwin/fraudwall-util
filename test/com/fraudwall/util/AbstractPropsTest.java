@@ -67,16 +67,18 @@ public abstract class AbstractPropsTest extends AbstractAnchorTest {
 	protected static final String ROOT_SQL;
 	protected static final String ROOT_SEED_DATA;
 
+	protected static final String OTHER_APP_NAME = "other";
+
 	/*
 	 * Locate ROOTDIR by searching for directories up the tree
 	 * that end with code/java
 	 */
 	static {
-		String javaDir = IOUtils.locateJavaDirectory();
-		if (javaDir == null) {
-			throw new IllegalStateException("Unable to locate java source directory");
+		String rootDir = IOUtils.locateRootDirectory();
+		if (rootDir == null) {
+			throw new IllegalStateException("Unable to locate root directory");
 		}
-		ROOTDIR = javaDir + File.separatorChar;
+		ROOTDIR = rootDir + File.separatorChar;
 		ROOT_SQL = ROOTDIR + File.separatorChar + "generated" + File.separatorChar + "sql";
 		ROOT_SEED_DATA = ROOTDIR + File.separatorChar + "seeddata";
 	}

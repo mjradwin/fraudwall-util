@@ -269,8 +269,7 @@ public final class DBConnectionUtils {
 	 * @see #createConnection(String, String, String, String)
 	 */
 	public Connection createConnection(String dbName) {
-		return createConnection(
-			getJdbcUrl(getDbHostName(), dbName), getDbUserName(), getDbPassword());
+		return createConnection(getJdbcUrl(getDbHostName(), dbName), getDbUserName(), getDbPassword());
 	}
 
 	/**
@@ -317,8 +316,7 @@ public final class DBConnectionUtils {
 			}
 			return connection;
 		} catch (SQLException ex) {
-			String message = "Unable to connect to database\n\tURL = " + url +
-					"\n\tuser = " + userName;
+			String message = "Unable to connect to database\n\tURL = " + url + "\n\tuser = " + userName;
 			throw new AnchorFatalError(message, ex);
 		}
 	}

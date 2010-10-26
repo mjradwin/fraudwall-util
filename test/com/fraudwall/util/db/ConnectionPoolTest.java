@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util.db;
 
@@ -55,8 +55,8 @@ public class ConnectionPoolTest extends AbstractPropsTest {
 	private static String TEST_DB2_NAME;
 
 	private ConnectionPool pool;
-	private DBConnectionUtils kcDbUtils;
-	private DBConnectionUtils tpDbUtils;
+	private DBConnectionUtils defaultDbUtils;
+	private DBConnectionUtils otherDbUtils;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -66,14 +66,14 @@ public class ConnectionPoolTest extends AbstractPropsTest {
 		pool = ConnectionPool.getInstance();
 
 		// Set up test database names
-		kcDbUtils = DBConnectionUtils.getInstance(DEFAULT);
-		tpDbUtils = DBConnectionUtils.getInstance(DEFAULT);
+		defaultDbUtils = DBConnectionUtils.getInstance(DEFAULT);
+		otherDbUtils = DBConnectionUtils.getInstance(OTHER_APP_NAME);
 
-		TEST_DB1_NAME = kcDbUtils.getDbDatabaseName() + TEST_DB1_SUFFIX;
-		TEST_DB2_NAME = tpDbUtils.getDbDatabaseName() + TEST_DB2_SUFFIX;
+		TEST_DB1_NAME = defaultDbUtils.getDbDatabaseName() + TEST_DB1_SUFFIX;
+		TEST_DB2_NAME = otherDbUtils.getDbDatabaseName() + TEST_DB2_SUFFIX;
 
-		kcDbUtils.setDbDatabaseName(TEST_DB1_NAME);
-		tpDbUtils.setDbDatabaseName(TEST_DB2_NAME);
+		defaultDbUtils.setDbDatabaseName(TEST_DB1_NAME);
+		otherDbUtils.setDbDatabaseName(TEST_DB2_NAME);
 
 		// drop test databases (if they exist)
 		DBUtils.dropDB(TEST_DB1_NAME);
@@ -95,9 +95,9 @@ public class ConnectionPoolTest extends AbstractPropsTest {
 		DBUtils.dropDB(TEST_DB2_NAME);
 
 		// restore default database name
-		tpDbUtils.setDbDatabaseName(null);
-		kcDbUtils.setDbDatabaseName(null);
-		kcDbUtils = tpDbUtils = null;
+		otherDbUtils.setDbDatabaseName(null);
+		defaultDbUtils.setDbDatabaseName(null);
+		defaultDbUtils = otherDbUtils = null;
 
 		super.tearDown();
 	}
@@ -106,22 +106,22 @@ public class ConnectionPoolTest extends AbstractPropsTest {
 
 	public void testGetInstanceUsesDefaultApplication() {
 		ConnectionPool def = ConnectionPool.getInstance();
-		ConnectionPool kc = ConnectionPool.getInstance(DEFAULT);
-		assertSame(def, kc);
+		ConnectionPool defByName = ConnectionPool.getInstance(DEFAULT);
+		assertSame(def, defByName);
 	}
 
 	public void testGetInstanceCreatesNewPoolForNewApplication() {
-		ConnectionPool def, kc, tp = null;
+		ConnectionPool def, defByName, other = null;
 		try {
 			def = ConnectionPool.getInstance();
-			kc = ConnectionPool.getInstance(DEFAULT);
-			tp = ConnectionPool.getInstance(DEFAULT);
-			// default should still be kingcrab
-			assertEquals(def, kc);
-			// tigerprawn's should be different
-			assertFalse(def == tp);
+			defByName = ConnectionPool.getInstance(DEFAULT);
+			other = ConnectionPool.getInstance(OTHER_APP_NAME);
+			// default should still be defByName
+			assertEquals(def, defByName);
+			// others's should be different
+			assertFalse(def == other);
 		} finally {
-			if (tp != null) tp.stopPool();
+			if (other != null) other.stopPool();
 		}
 	}
 
@@ -282,7 +282,7 @@ public class ConnectionPoolTest extends AbstractPropsTest {
 		assertEquals(1, pool.getNumberAvailableConnections());
 
 		// checkout a tigerprawn db connection
-		ConnectionPool tp = ConnectionPool.getInstance(DEFAULT);
+		ConnectionPool tp = ConnectionPool.getInstance(OTHER_APP_NAME);
 		try {
 			assertNotSame(pool, tp);
 			assertEquals(0, tp.getNumberAvailableConnections());

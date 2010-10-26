@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util;
 
@@ -60,26 +60,9 @@ public class ApplicationRunnerTest extends AbstractPropsTest {
 	}
 
 	public void testGetHostNameAliasReturnsCorrectHostName() {
-		checkGetHostNameAliasReturnsCorrectHostName("tp.ag.prod", DEFAULT, TEST_CUSTOMER, null);
-		checkGetHostNameAliasReturnsCorrectHostName("ss.ag.prod", DEFAULT, TEST_CUSTOMER, null);
-		checkGetHostNameAliasReturnsCorrectHostName("kc.ag.prod", DEFAULT, TEST_CUSTOMER, null);
+		checkGetHostNameAliasReturnsCorrectHostName("def.ag.prod", DEFAULT, TEST_CUSTOMER, null);
 		checkGetHostNameAliasReturnsCorrectHostName("db.ag.prod", "database", TEST_CUSTOMER, null);
-
-		checkGetHostNameAliasReturnsCorrectHostName("tp.ab.prod", DEFAULT, "AdGuys", null);
-		checkGetHostNameAliasReturnsCorrectHostName("ss.ab.prod", DEFAULT, "AdGuys", null);
-		checkGetHostNameAliasReturnsCorrectHostName("kc.ab.prod", DEFAULT, "AdGuys", null);
-		checkGetHostNameAliasReturnsCorrectHostName("db.ab.prod", "database", "AdGuys", null);
-
-		checkGetHostNameAliasReturnsCorrectHostName("db.tp.ag.prod", DEFAULT, TEST_CUSTOMER, "db");
-		checkGetHostNameAliasReturnsCorrectHostName("db.ss.ag.prod", DEFAULT, TEST_CUSTOMER, "db");
-		checkGetHostNameAliasReturnsCorrectHostName("db.kc.ag.prod", DEFAULT, TEST_CUSTOMER, "db");
-
-		checkGetHostNameAliasReturnsCorrectHostName("db.tp.ab.prod", DEFAULT, "AdGuys", "db");
-		checkGetHostNameAliasReturnsCorrectHostName("db.ss.ab.prod", DEFAULT, "AdGuys", "db");
-		checkGetHostNameAliasReturnsCorrectHostName("db.kc.ab.prod", DEFAULT, "AdGuys", "db");
-
-		checkGetHostNameAliasReturnsCorrectHostName("wh.kc.ab.prod", DEFAULT, "AdGuys", "wh");
-		checkGetHostNameAliasReturnsCorrectHostName("wh.naut.ab.prod", DEFAULT, "AdGuys", "wh");
+		checkGetHostNameAliasReturnsCorrectHostName("db.def.ag.prod", DEFAULT, TEST_CUSTOMER, "db");
 	}
 
 	private void checkGetHostNameAliasReturnsCorrectHostName(String host, String appName, String custName, String dbHost) {
@@ -87,29 +70,25 @@ public class ApplicationRunnerTest extends AbstractPropsTest {
 	}
 
 	public void testGetHostNameAliasReturnsCorrectHostNameForNonProdEnvironment() {
-		assertEquals("tp.ag.qa", new ApplicationRunner(DEFAULT, TEST_CUSTOMER, null, "qa").getHostNameAlias());
+		assertEquals("def.ag.qa", new ApplicationRunner(DEFAULT, TEST_CUSTOMER, null, "qa").getHostNameAlias());
 	}
 
 	//----------------------------------------------- isEnabled
 
+	private final static String TEST_CUST2 = TEST_CUSTOMER + "2", TEST_CUST3 = TEST_CUSTOMER + "3";
+
 	public void testIsEnabledReturnsValueCorrectly() throws UnknownHostException {
+		FWPropsTest.setProperty("customer.code." + TEST_CUST2, "ag2");
+		FWPropsTest.setProperty("customer.code." + TEST_CUST3, "ag3");
 		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, TEST_CUSTOMER);
-		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, TEST_CUSTOMER);
-		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, TEST_CUSTOMER);
-
-		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, "AdGuys");
-		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, "AdGuys");
-		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, "AdGuys");
-
-		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, "AdEngage");
-		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, "AdEngage");
-		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, "AdEngage");
+		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, TEST_CUST2);
+		checkIsEnabledOnlyReturnsTrueForTheCorrectPair(DEFAULT, TEST_CUST3);
 	}
 
 	private void checkIsEnabledOnlyReturnsTrueForTheCorrectPair(String appName, String custName) throws UnknownHostException {
 		String host = makeRunner(appName, custName).getHostNameAlias();
 		for (String app : new String[] {DEFAULT, DEFAULT, DEFAULT}) {
-			for (String cust : new String[] {"AdGuys", "AdEngage", "AdGuys"}) {
+			for (String cust : new String[] {TEST_CUSTOMER, TEST_CUST2, TEST_CUST3}) {
 				assertEquals("Invalid value for: " + appName + "," + custName,
 					app.equals(appName) && cust.equals(custName),
 					new ApplicationRunnerMock(app, cust, host).isEnabled());

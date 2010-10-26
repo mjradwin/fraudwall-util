@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util;
 
@@ -207,13 +207,13 @@ public class FWPropsTest extends AbstractPropsTest {
 	}
 
 	public void testGetCustomerCodeReturnsNullIfNoCustomerCodeSpecified() {
-		FWProps.initialize(null, "HebCal");
+		FWProps.initialize(null, "BadCust");
 		assertNull(FWProps.getCustomerCode());
 	}
 
 	public void testGetCustomerCodeReturnsNullIfCustomerCodeIsBlank() {
-		FWProps.initialize(null, "HebCal");
-		setProperty("customer.code.HebCal", "");
+		FWProps.initialize(null, "BadCust");
+		setProperty("customer.code.BadCust", "");
 		assertNull(FWProps.getCustomerCode());
 	}
 
@@ -852,7 +852,7 @@ public class FWPropsTest extends AbstractPropsTest {
 
 	public void testGetAllCustomersIgnoresDemoAndNocust() throws IOException {
 		Properties props = new Properties();
-		props.put("customer.code.AdGuys", "ab");
+		props.put("customer.code.AdGuys", "ag");
 		props.put("customer.code.Foobar", "quux");
 		props.put("customer.code.Baaz", "");
 		props.put("customer.code.demo", "Demo");
@@ -871,18 +871,16 @@ public class FWPropsTest extends AbstractPropsTest {
 
 	public void testGetApplicationEnabledCustomers() throws IOException {
 		Properties props = new Properties();
-		props.put("customer.code.AdGuys", "ab");
+		props.put("customer.code.AdGuys", "ag");
 		props.put("customer.code.Foobar", "quux");
 		props.put("customer.code.Baaz", "");
 		props.put("customer.code.demo", "Demo");
 		props.put("customer.code.nocust", "all");
 		File configDir = getCreatedOutputDir();
 		createMinimalProperties(configDir, false, false, false);
-		createFileFromLines("custs/AdGuys.properties", "kingcrab.enabled=true");
-		createFileFromLines("custs/Baaz.properties", "kingcrab.enabled=false");
-		createFileFromLines("custs/Foobar.properties", "kingcrab.enabled=true");
-		// Since we're initializing as AdGuys, we need AdGuys.properties
-		createFileFromLines("custs/AdGuys.properties", "test=true");
+		createFileFromLines("custs/AdGuys.properties", "default.enabled=true");
+		createFileFromLines("custs/Baaz.properties", "default.enabled=false");
+		createFileFromLines("custs/Foobar.properties", "default.enabled=true");
 		FWProps fwprops = new FWPropsMock(configDir.toString());
 		fwprops.initialize();
 		for (Entry<Object, Object> entry : props.entrySet()) {

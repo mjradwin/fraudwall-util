@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util.db;
 
@@ -61,6 +61,7 @@ import com.fraudwall.util.db.AnchorResultSet;
  * @author Allan Heydon
  */
 public class DBUtilsTest extends AbstractPropsTest {
+
 	private static final String DB_NAME = "db_utils_test";
 	private static final String TABLE_NAME = "test_table";
 	private static final String CREATE_TABLE_COMMAND =
@@ -213,7 +214,7 @@ public class DBUtilsTest extends AbstractPropsTest {
 
 	public void testCreateTableLikeAcrossDBsSameTableNameThrowsIfSourceTableDoesNotExist() throws Exception {
 		try {
-			DBUtils.createTableLikeAcrossDBs("foo", DEFAULT, DEFAULT);
+			DBUtils.createTableLikeAcrossDBs("foo", OTHER_APP_NAME, DEFAULT);
 			fail();
 		} catch (SQLException ex) {
 			assertEquals("Table 'db_utils_test.foo@localhost' doesn't exist.", ex.getMessage());
@@ -221,13 +222,10 @@ public class DBUtilsTest extends AbstractPropsTest {
 	}
 
 	public void testCreateTableLikeAcrossDBsSameTableNameCreatesTableInTargetDBLikeTableInSourceDB() throws Exception {
-		DBConnectionUtils wh = DBConnectionUtils.getInstance(DEFAULT);
-		wh.setDbDatabaseName(null); // clear any existing name
-		String whDbName = wh.getDbDatabaseName() + "_test";
-		wh.setDbDatabaseName(whDbName);
-		DBUtils.dropDB(DEFAULT, whDbName);
-		DBUtils.createDB(DEFAULT, whDbName);
-		DBUtils.createTableLikeAcrossDBs(TABLE_NAME, DEFAULT, DEFAULT);
+		String otherDbName = DBConnectionUtils.getInstance(OTHER_APP_NAME).getDbDatabaseName();
+		DBUtils.dropDB(OTHER_APP_NAME, otherDbName);
+		DBUtils.createDB(OTHER_APP_NAME, otherDbName);
+		DBUtils.createTableLikeAcrossDBs(TABLE_NAME, OTHER_APP_NAME, DEFAULT);
 		checkCreateTableLikeAcrossDBs(TABLE_NAME);
 	}
 
@@ -235,7 +233,7 @@ public class DBUtilsTest extends AbstractPropsTest {
 
 	public void testCreateTableLikeAcrossDBsDiffTableNameThrowsIfSourceTableDoesNotExist() throws Exception {
 		try {
-			DBUtils.createTableLikeAcrossDBs("bar", DEFAULT, "foo", DEFAULT);
+			DBUtils.createTableLikeAcrossDBs("bar", OTHER_APP_NAME, "foo", DEFAULT);
 			fail();
 		} catch (SQLException ex) {
 			assertEquals("Table 'db_utils_test.foo@localhost' doesn't exist.", ex.getMessage());
@@ -243,19 +241,16 @@ public class DBUtilsTest extends AbstractPropsTest {
 	}
 
 	public void testCreateTableLikeAcrossDBsDiffTableNameCreatesTableInTargetDBLikeTableInSourceDB() throws Exception {
-		DBConnectionUtils wh = DBConnectionUtils.getInstance(DEFAULT);
-		wh.setDbDatabaseName(null); // clear any existing name
-		String whDbName = wh.getDbDatabaseName() + "_test";
-		wh.setDbDatabaseName(whDbName);
-		DBUtils.dropDB(DEFAULT, whDbName);
-		DBUtils.createDB(DEFAULT, whDbName);
+		String otherDbName = DBConnectionUtils.getInstance(OTHER_APP_NAME).getDbDatabaseName();
+		DBUtils.dropDB(OTHER_APP_NAME, otherDbName);
+		DBUtils.createDB(OTHER_APP_NAME, otherDbName);
 		String newTableName = TABLE_NAME + "_new";
-		DBUtils.createTableLikeAcrossDBs(newTableName, DEFAULT, TABLE_NAME, DEFAULT);
+		DBUtils.createTableLikeAcrossDBs(newTableName, OTHER_APP_NAME, TABLE_NAME, DEFAULT);
 		checkCreateTableLikeAcrossDBs(newTableName);
 	}
 
 	private void checkCreateTableLikeAcrossDBs(String destTableName) throws SQLException {
-		assertTrue(DBUtils.tableExists(DEFAULT, destTableName));
+		assertTrue(DBUtils.tableExists(OTHER_APP_NAME, destTableName));
 		String createTableCommand = (CREATE_TABLE_COMMAND + " ENGINE=MyISAM DEFAULT CHARSET=utf8")
 			.replace(TABLE_NAME + " (", "`" + destTableName + "` (\n  ")
 			.replace(") ENGINE", "\n) ENGINE")
@@ -263,7 +258,7 @@ public class DBUtilsTest extends AbstractPropsTest {
 			.replace("KEY (x)", "KEY  (`x`)")
 			.replace(", ", ",\n  ");
 		assertStringsEqualsIgnoreWhiteSpace(
-			createTableCommand, DBUtils.getCreateTableCommand(DEFAULT, destTableName));
+			createTableCommand, DBUtils.getCreateTableCommand(OTHER_APP_NAME, destTableName));
 	}
 
 	// ================================================= renameTables
@@ -457,67 +452,67 @@ public class DBUtilsTest extends AbstractPropsTest {
 	}
 
 	public void testSetPreparedStatementValuesAcceptsStringType() throws Exception {
-		 invokeSetPreparedStatementValues(new Object[] { "foobar" }, new Closure() {
+		invokeSetPreparedStatementValues(new Object[] { "foobar" }, new Closure() {
 			@Override public void run(AnchorResultSet rs) throws Exception {
 				assertEquals("foobar", rs.getString(1));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsBooleanType() throws Exception {
-		 invokeSetPreparedStatementValues(new Object[] { Boolean.TRUE }, new Closure() {
+		invokeSetPreparedStatementValues(new Object[] { Boolean.TRUE }, new Closure() {
 			@Override public void run(AnchorResultSet rs) throws Exception {
 				assertTrue(rs.getBoolean(1));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsByteType() throws Exception {
-		 invokeSetPreparedStatementValues(new Object[] { new Byte(Byte.MAX_VALUE) }, new Closure() {
+		invokeSetPreparedStatementValues(new Object[] { new Byte(Byte.MAX_VALUE) }, new Closure() {
 			@Override public void run(AnchorResultSet rs) throws Exception {
 				assertEquals(Byte.MAX_VALUE, rs.getByte(1));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsShortType() throws Exception {
-		 invokeSetPreparedStatementValues(new Object[] { new Short(Short.MAX_VALUE) }, new Closure() {
+		invokeSetPreparedStatementValues(new Object[] { new Short(Short.MAX_VALUE) }, new Closure() {
 			@Override public void run(AnchorResultSet rs) throws Exception {
 				assertEquals(Short.MAX_VALUE, rs.getShort(1));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsIntType() throws Exception {
-		 invokeSetPreparedStatementValues(new Object[] { Integer.MAX_VALUE }, new Closure() {
+		invokeSetPreparedStatementValues(new Object[] { Integer.MAX_VALUE }, new Closure() {
 			@Override public void run(AnchorResultSet rs) throws Exception {
 				assertEquals(Integer.MAX_VALUE, rs.getInt(1));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsLongType() throws Exception {
-		 invokeSetPreparedStatementValues(new Object[] { Long.MAX_VALUE }, new Closure() {
+		invokeSetPreparedStatementValues(new Object[] { Long.MAX_VALUE }, new Closure() {
 			@Override public void run(AnchorResultSet rs) throws Exception {
 				assertEquals(Long.MAX_VALUE, rs.getLong(1));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsFloatType() throws Exception {
-		 invokeSetPreparedStatementValues(new Object[] { Float.MAX_VALUE }, new Closure() {
+		invokeSetPreparedStatementValues(new Object[] { Float.MAX_VALUE }, new Closure() {
 			@Override public void run(AnchorResultSet rs) throws Exception {
 				assertEquals(Float.MAX_VALUE, rs.getFloat(1));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsDoubleType() throws Exception {
-		 invokeSetPreparedStatementValues(new Object[] { 1.2345678901234E123 }, new Closure() {
+		invokeSetPreparedStatementValues(new Object[] { 1.2345678901234E123 }, new Closure() {
 			@Override public void run(AnchorResultSet rs) throws Exception {
 				assertEquals(1.2345678901234E123, rs.getDouble(1));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsSqlDateType() throws Exception {
@@ -534,7 +529,7 @@ public class DBUtilsTest extends AbstractPropsTest {
 				assertInstanceOf(gotDate, java.util.Date.class);
 				assertEquals(cal2.getTimeInMillis(), gotDate.getTime());
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsSqlTimestampType() throws Exception {
@@ -544,7 +539,7 @@ public class DBUtilsTest extends AbstractPropsTest {
 				long nowNoMillis = (now.getTime() / DateUtils.MILLIS_PER_SECOND) * DateUtils.MILLIS_PER_SECOND;
 				assertEquals(new Date(nowNoMillis), rs.getDate(1));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesAcceptsUtilDateType() throws Exception {
@@ -555,7 +550,7 @@ public class DBUtilsTest extends AbstractPropsTest {
 				long nowNoMillis = (now.getTime() / DateUtils.MILLIS_PER_SECOND) * DateUtils.MILLIS_PER_SECOND;
 				assertEquals(new Date(nowNoMillis), rs.getDate(1));
 			}
-		 });
+		});
 	}
 
 	private static enum TestEnum {
@@ -567,7 +562,7 @@ public class DBUtilsTest extends AbstractPropsTest {
 			@Override public void run(AnchorResultSet rs) throws Exception {
 				assertEquals(TestEnum.BAR, TestEnum.valueOf(rs.getString(1)));
 			}
-		 });
+		});
 	}
 
 	public void testSetPreparedStatementValuesThrowsOnUnsupportedType() throws Exception {

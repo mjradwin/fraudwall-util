@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util.db;
 
@@ -72,13 +72,14 @@ public class DBConnectionUtilsTest extends AbstractPropsTest {
 		DBConnectionUtils kc = DBConnectionUtils.getInstance(DEFAULT);
 		assertEquals(def,kc);
 	}
+
 	// =============================================================== getDbDatabaseName
 
 	public void testGetDbDatabaseNameReturnsDefaultFromPropertyFile() {
 		String expectedDbName = FWProps.getStringProperty(DEFAULT + ".db.name");
 		String gotDbName = DBConnectionUtils.getDefaultInstance().getDbDatabaseName();
 		assertEquals(expectedDbName, gotDbName);
-		String unExpectedDbName = FWProps.getStringProperty(DEFAULT + ".db.name");
+		String unExpectedDbName = FWProps.getStringProperty(OTHER_APP_NAME + ".db.name");
 		assertFalse(unExpectedDbName.equals(gotDbName));
 	}
 
@@ -235,6 +236,7 @@ public class DBConnectionUtilsTest extends AbstractPropsTest {
 
 	private Object insertAndReadValue(String sqlType, String insertValue, int returnType) throws SQLException {
 		DBConnectionUtils.getDefaultInstance().setDbDatabaseName(DB_NAME);
+		DBUtils.dropDB(DB_NAME);
 		DBUtils.createDB(DB_NAME);
 		DBUtils.dropTable(TABLE_NAME);
 		try {

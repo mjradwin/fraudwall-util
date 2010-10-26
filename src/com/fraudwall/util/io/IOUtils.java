@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util.io;
 
@@ -129,19 +129,18 @@ public abstract class IOUtils {
 	}
 
 	/**
-	 * Attempts to find a directory named <code>name</code> that is a child of an
-	 * ancestor of the current directory.
+	 * Attempts to find a directory that is an ancestor of the current directory
+	 * and that contains both "src" and "test" sub-directories.
 	 *
-	 * @return absolute path of directory, or null, if it could not be found
+	 * @return absolute path of directory, or {@code null} if it could not be found.
 	 */
-	public static String locateDirectory(String suffix) {
+	public static String locateRootDirectory() {
 		final File[] fsRoots = File.listRoots(); // stop when we get to the root
 		try {
 			File dir = new File(new File(".").getCanonicalPath());
-			for (;;) {
-				File child = new File(dir, suffix);
-				if (child.exists()) {
-					return child.getAbsolutePath();
+			while (true) {
+				if (new File(dir, "src").exists() && new File(dir, "test").exists()) {
+					return dir.getAbsolutePath();
 				}
 				// Are we at the root?
 				for (File fsRoot : fsRoots) {
@@ -154,20 +153,6 @@ public abstract class IOUtils {
 		} catch (IOException e) {
 			return null;
 		}
-	}
-
-	/**
-	 * Attempts to find a directory named "java" that is a child of an ancestor of the
-	 * current directory.
-	 *
-	 * @return absolute path of directory, or null, if it could not be found
-	 */
-	public static String locateJavaDirectory() {
-		File f = new File("java");
-		if (f.exists()) {
-			return f.getAbsolutePath();
-		}
-		return IOUtils.locateDirectory("java");
 	}
 
 	/**
@@ -256,7 +241,7 @@ public abstract class IOUtils {
 	 */
 	public static File getGeneratedSqlDir() {
 		return Utilities.isCalledFromUnitTest()
-			? new File(IOUtils.locateJavaDirectory(), "generated/sql")
+			? new File(IOUtils.locateRootDirectory(), "generated/sql")
 			: new File(IOUtils.getRootDir(), "sql/generated");
 	}
 

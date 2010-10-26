@@ -50,6 +50,7 @@ import java.util.regex.Pattern;
 public class BrowscapUserAgent extends HashMap<String, String>
 	implements Comparable<BrowscapUserAgent>
 {
+	private static final String ACCEPT_SEMI_COLON_FOR_COMMA_PROP_NAME = "useragent.browscap.acceptSemiColonForComma";
 	private static final String FALSE_VALUE = "0";
 	private static final String TRUE_VALUE = "1";
 
@@ -142,7 +143,7 @@ public class BrowscapUserAgent extends HashMap<String, String>
 	 * @return The compiled regular expression as a Java {@link Pattern}.
 	 */
 	private static Pattern browscapPatternToJavaPattern(String s) {
-		boolean acceptSemiColonForComma = FWProps.getBooleanProperty("useragent.browscap.acceptSemiColonForComma");
+		boolean acceptSemiColonForComma = FWProps.getBooleanProperty(ACCEPT_SEMI_COLON_FOR_COMMA_PROP_NAME);
 		StringBuilder sb = new StringBuilder((s.length() * 2) + 2);
 		sb.append('^');
 		for (int i = 0; i < s.length(); i++) {
