@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util.io;
 
@@ -62,7 +62,6 @@ import com.fraudwall.util.ArgCheck;
  * allow a different delimiter to be supplied, and the {@link #setDelimiter(char)}
  * method can be called even after the writer has been constructed.
  *
- * @see com.fraudwall.types.FWObjectCsvWriter
  * @author Allan Heydon
  */
 public class AnchorCsvWriter {

@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util;
 
@@ -155,9 +155,7 @@ public abstract class AbstractPropsTest extends AbstractAnchorTest {
 	 * @param appName
 	 *            Name of the product to use to locate the correct property
 	 *            file(s) to read. May be <code>null</code>. When non-null,
-	 *            this is typically one of the symbolic constants
-	 *            {@link #LOGANALYZER}, {@link #DEFAULT}, or
-	 *            {@link #DEFAULT}.
+	 *            this is typically a symbolic constant such as {@link #DEFAULT}.
 	 * @param custName
 	 *            Name of the customer to use to locate the correct property
 	 *            file(s) to read. May be <code>null</code>. Should
