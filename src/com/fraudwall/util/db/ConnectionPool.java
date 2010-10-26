@@ -46,7 +46,6 @@ import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.fraudwall.util.ConnectionPoolMBean;
 import com.fraudwall.util.FWProps;
 import com.fraudwall.util.Require;
 import com.mysql.jdbc.ConnectionImpl;
