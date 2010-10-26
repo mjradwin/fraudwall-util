@@ -30,7 +30,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-package com.fraudwall.util;
+package com.fraudwall.util.db;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -38,7 +38,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Queue;
 
-import com.fraudwall.util.ConnectionPool.ConnectionWrapper;
+import com.fraudwall.util.AbstractPropsTest;
+import com.fraudwall.util.db.ConnectionPool;
+import com.fraudwall.util.db.ConnectionPool.ConnectionWrapper;
 
 /**
  * Tests the {@link ConnectionPool} implementation.

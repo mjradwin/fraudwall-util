@@ -30,7 +30,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-package com.fraudwall.util;
+package com.fraudwall.util.db;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -38,6 +38,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+
+import com.fraudwall.util.AbstractPropsTest;
+import com.fraudwall.util.FWProps;
+import com.fraudwall.util.db.ConnectionPool;
 
 
 public class DBConnectionUtilsTest extends AbstractPropsTest {

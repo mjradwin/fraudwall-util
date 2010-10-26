@@ -28,9 +28,9 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
-package com.fraudwall.util;
+package com.fraudwall.util.db;
 
 import java.sql.Connection;
 import java.util.Collection;
@@ -46,6 +46,9 @@ import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fraudwall.util.ConnectionPoolMBean;
+import com.fraudwall.util.FWProps;
+import com.fraudwall.util.Require;
 import com.mysql.jdbc.ConnectionImpl;
 
 /**

@@ -28,26 +28,51 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
-package com.fraudwall.util;
+package com.fraudwall.util.db;
 
 import java.sql.SQLException;
-import java.sql.Statement;
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Class for running an arbitrary SQL statement. Use an instance of this class
- * if you require access to the low-level {@link Statement}. Otherwise, you
- * probably want to use {@link SQLResultsClosure} or one of its subclasses.
- * <p>
- * {@code T} is the type of the query result.
+ * A {@link SQLResultsClosure} that executes a SQL statement and collects the
+ * results from each row into a List. The
+ * {@link #getElementFromResult(AnchorResultSet, int)} method must be overridden
+ * to determine what information to extract from each database row in the
+ * query's result set.<p>
+ *
+ * The generic parameter <code>T</code> is the type of data extracted from
+ * each row of the result set. The result of the {@link #exec(AnchorResultSet)}
+ * method is a list of T.<p>
  *
  * @see SQLResultsClosure
  * @see SQLResultsProcessorClosure
- * @see SQLResultsListClosure
  * @see SQLIgnoreResultsClosure
  */
-public abstract class SQLClosure<T> {
-	public abstract T exec(Statement stmt) throws SQLException;
+public abstract class SQLResultsListClosure<T> extends SQLResultsClosure<List<T>> {
+
+	/**
+	 * Constructs a new closure that runs the given <code>sql</code> statement
+	 * and returns a list of the objects returned from
+	 * {@link #getElementFromResult}.
+	 */
+	public SQLResultsListClosure(String sql) {
+		super(sql);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> exec(AnchorResultSet rs) throws SQLException {
+		List<T> list = (List<T>) new ArrayList<Object>();
+		int rowNum = 0;
+		while (rs.next()) {
+			list.add(getElementFromResult(rs, rowNum));
+		}
+		return list;
+	}
+
+	protected abstract T getElementFromResult(AnchorResultSet rs, int rowNum) throws SQLException;
+
 }

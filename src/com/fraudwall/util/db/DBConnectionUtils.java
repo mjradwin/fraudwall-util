@@ -28,9 +28,9 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
-package com.fraudwall.util;
+package com.fraudwall.util.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -43,6 +43,9 @@ import java.util.TimeZone;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.fraudwall.util.AnchorFatalError;
+import com.fraudwall.util.FWProps;
 
 /**
  * Utilities for creating MySQL database connections based on Anchor
@@ -65,7 +68,7 @@ import org.apache.commons.logging.LogFactory;
  * @see ConnectionPool
  * @author Allan Heydon
  */
- public final class DBConnectionUtils {
+public final class DBConnectionUtils {
 
 	// Database property names
 	private static final String DB_HOST_PROP_NAME = "host";
@@ -315,7 +318,7 @@ import org.apache.commons.logging.LogFactory;
 			return connection;
 		} catch (SQLException ex) {
 			String message = "Unable to connect to database\n\tURL = " + url +
-					  "\n\tuser = " + userName;
+					"\n\tuser = " + userName;
 			throw new AnchorFatalError(message, ex);
 		}
 	}

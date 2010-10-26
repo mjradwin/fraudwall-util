@@ -28,34 +28,26 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
-package com.fraudwall.util;
+package com.fraudwall.util.db;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 /**
- * Class for running an arbitrary SQL statement. Each executed statement is logged
- * at the INFO log level. The {@link SQLResultsClosure#exec(AnchorResultSet)} method must
- * be overridden to process the results.
+ * Class for running an arbitrary SQL statement. Use an instance of this class
+ * if you require access to the low-level {@link Statement}. Otherwise, you
+ * probably want to use {@link SQLResultsClosure} or one of its subclasses.
+ * <p>
+ * {@code T} is the type of the query result.
  *
+ * @see SQLResultsClosure
  * @see SQLResultsProcessorClosure
  * @see SQLResultsListClosure
  * @see SQLIgnoreResultsClosure
  */
-public abstract class SQLResultsClosure<T> extends SQLClosure<T> {
-	private final String sql;
-
-	/** Constructs a new closure that runs the given <code>sql</code> statement. */
-	public SQLResultsClosure(String sql) {
-		this.sql = sql;
-	}
-
-	@Override
-	public T exec(Statement stmt) throws SQLException {
-		return exec(DBUtils.logAndExecute(stmt, sql));
-	}
-
-	public abstract T exec(AnchorResultSet results) throws SQLException;
+public abstract class SQLClosure<T> {
+	public abstract T exec(Statement stmt) throws SQLException;
 }

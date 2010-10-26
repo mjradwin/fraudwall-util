@@ -28,51 +28,47 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
-package com.fraudwall.util;
+package com.fraudwall.util.db;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
- * A {@link SQLResultsClosure} that executes a SQL statement and collects the
- * results from each row into a List. The
- * {@link #getElementFromResult(AnchorResultSet, int)} method must be overridden
- * to determine what information to extract from each database row in the
- * query's result set.<p>
- *
- * The generic parameter <code>T</code> is the type of data extracted from
- * each row of the result set. The result of the {@link #exec(AnchorResultSet)}
- * method is a list of T.<p>
+ * A {@link SQLResultsClosure} that executes a SQL statement and invokes a method
+ * on each row of the result set. The
+ * {@link #processResult(AnchorResultSet, int)} method must be overridden;
+ * this method gets called on each result set row.
  *
  * @see SQLResultsClosure
- * @see SQLResultsProcessorClosure
+ * @see SQLResultsListClosure
  * @see SQLIgnoreResultsClosure
  */
-public abstract class SQLResultsListClosure<T> extends SQLResultsClosure<List<T>> {
-
+public abstract class SQLResultsProcessorClosure extends SQLResultsClosure<Object> {
 	/**
-	 * Constructs a new closure that runs the given <code>sql</code> statement
-	 * and returns a list of the objects returned from
-	 * {@link #getElementFromResult}.
+	 * Constructs a new {@link SQLResultsProcessorClosure} that runs the query
+	 * specified by the given {@code sql} text.
 	 */
-	public SQLResultsListClosure(String sql) {
+	public SQLResultsProcessorClosure(String sql) {
 		super(sql);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> exec(AnchorResultSet rs) throws SQLException {
-		List<T> list = (List<T>) new ArrayList<Object>();
-		int rowNum = 0;
-		while (rs.next()) {
-			list.add(getElementFromResult(rs, rowNum));
+	public Void exec(AnchorResultSet results) throws SQLException {
+		int count = 0;
+		while (results.next()) {
+			processResult(results, count++);
 		}
-		return list;
+		return null;
 	}
 
-	protected abstract T getElementFromResult(AnchorResultSet rs, int rowNum) throws SQLException;
-
+	/**
+	 * Method invoked on each row of the query's result set. Prior to this method being
+	 * called, the {@link AnchorResultSet#next()} method will have been called on
+	 * {@code results} and returned a result of {@code true}.
+	 *
+	 * @param rowNum The 0-based row number of the given <code>results</code>.
+	 */
+	protected abstract void processResult(AnchorResultSet results, int rowNum) throws SQLException;
 }

@@ -30,7 +30,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-package com.fraudwall.util;
+package com.fraudwall.util.db;
 
 import java.io.File;
 import java.sql.Connection;
@@ -48,6 +48,11 @@ import java.util.TimeZone;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.time.DateUtils;
+
+import com.fraudwall.util.AbstractPropsTest;
+import com.fraudwall.util.AnchorFatalError;
+import com.fraudwall.util.FWPropsTest;
+import com.fraudwall.util.db.AnchorResultSet;
 
 
 /**

@@ -36,6 +36,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.fraudwall.util.db.AnchorResultSetTest;
+import com.fraudwall.util.db.ConnectionPoolTest;
+import com.fraudwall.util.db.DBConnectionUtilsTest;
+import com.fraudwall.util.db.DBUtilsTest;
+import com.fraudwall.util.db.SqlStatementIteratorTest;
 import com.fraudwall.util.fp.FP64SaveInputTest;
 import com.fraudwall.util.fp.FP64Test;
 import com.fraudwall.util.io.AnchorCsvWriterTest;

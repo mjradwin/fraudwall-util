@@ -28,9 +28,9 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
-package com.fraudwall.util;
+package com.fraudwall.util.db;
 
 import java.io.Reader;
 import java.io.StringReader;
@@ -39,8 +39,8 @@ import junit.framework.TestCase;
 
 /**
  * Tests the {@link SqlStatementIterator} implementation.
- * 
- * @author Allan Heydon 
+ *
+ * @author Allan Heydon
  */
 public class SqlStatementIteratorTest extends TestCase {
 	private static final String COMMENT_LINE_1 = "-- This is a comment line.\n";
@@ -58,22 +58,22 @@ public class SqlStatementIteratorTest extends TestCase {
 	public SqlStatementIteratorTest() {
 		super("SqlStatementIteratorTest");
 	}
-	
+
 	// ================================================ constructor
-	
+
 	public void testConstructorClosesReaderIfItIsEmpty() {
 		StringReaderMock r = new StringReaderMock("");
 		new SqlStatementIterator(r);
 		assertTrue(r.wasCloseCalled());
 	}
-	
+
 	public void testConstructorClosesReaderIfItContainsOnlyCommentsAndBlankLines() {
 		StringBuilder sb = buildStringContainingBlankAndCommentLinesOnly();
 		StringReaderMock r = new StringReaderMock(sb.toString());
 		new SqlStatementIterator(r);
 		assertTrue(r.wasCloseCalled());
 	}
-	
+
 	public void testConstructorThrowsExceptionIfFileStartsWithUnfinishedMultiLineStatement() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(MULTI_LINE_STMT_PART_1 + "\n");
@@ -85,7 +85,7 @@ public class SqlStatementIteratorTest extends TestCase {
 			// expected case
 		}
 	}
-	
+
 	// ================================================ hasNext
 
 	public void testHasNextReturnsFalseForEmptyReader() {
@@ -108,7 +108,7 @@ public class SqlStatementIteratorTest extends TestCase {
 		SqlStatementIterator it = new SqlStatementIterator(r);
 		assertTrue(it.hasNext());
 	}
-	
+
 	public void testHasNextReturnsFalseIfRestOfFileIsCommentsOrBlankLinesOnly() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(STMT_1 + ";\n");
@@ -118,7 +118,7 @@ public class SqlStatementIteratorTest extends TestCase {
 		it.next(); // skip first statement
 		assertFalse(it.hasNext());
 	}
-	
+
 	public void testHasNextIgnoresCommentsAndBlankLinesBetweenStatements() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(STMT_1 + ";\n");
@@ -131,7 +131,7 @@ public class SqlStatementIteratorTest extends TestCase {
 	}
 
 	// ================================================ next
-	
+
 	public void testNextThrowsIllegalStateExceptionOnExhaustedIterator() {
 		Reader r = new StringReader("");
 		SqlStatementIterator it = new SqlStatementIterator(r);
@@ -142,7 +142,7 @@ public class SqlStatementIteratorTest extends TestCase {
 			// expected case
 		}
 	}
-	
+
 	public void testNextReturnsSingleLineStatementWithoutTrailingSemicolon() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(STMT_1 + ";\n");
@@ -150,7 +150,7 @@ public class SqlStatementIteratorTest extends TestCase {
 		SqlStatementIterator it = new SqlStatementIterator(r);
 		assertEquals(STMT_1, it.next());
 	}
-	
+
 	public void testNextReturnsMultipleSingleLineStatementsWithoutTrailingSemicolons() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(STMT_1 + ";\n");
@@ -180,7 +180,7 @@ public class SqlStatementIteratorTest extends TestCase {
 		it.next();
 		assertTrue(r.wasCloseCalled());
 	}
-	
+
 	public void testNextThrowsExceptionIfFileStartsWithUnfinishedMultiLineStatement() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(STMT_1 + ";\n");
@@ -219,14 +219,14 @@ public class SqlStatementIteratorTest extends TestCase {
 	}
 
 	// ================================================== close
-	
+
 	public void testCloseInvokesCloseMethodOfUnderlyingReader() {
 		StringReaderMock r = new StringReaderMock(STMT_1 + ";\n");
 		SqlStatementIterator it = new SqlStatementIterator(r);
 		it.close();
 		assertTrue(r.wasCloseCalled());
 	}
-	
+
 	public void testCloseDoesNotInvokeCloseMethodOfUnderlyingReaderIfAlreadyClosed() {
 		StringReaderMock r = new StringReaderMock(STMT_1 + ";\n");
 		SqlStatementIterator it = new SqlStatementIterator(r);
@@ -235,7 +235,7 @@ public class SqlStatementIteratorTest extends TestCase {
 		it.close();
 		assertFalse(r.wasCloseCalled());
 	}
-	
+
 	// ================================================== helpers
 
 	private StringBuilder buildStringContainingBlankAndCommentLinesOnly() {
@@ -251,25 +251,25 @@ public class SqlStatementIteratorTest extends TestCase {
 		sb.append(COMMENT_LINE_2);
 		sb.append(BLANK_LINE);
 	}
-	
+
 	private static class StringReaderMock extends StringReader {
 		private boolean closeCalled;
-		
+
 		public StringReaderMock(String str) {
 			super(str);
 			resetCloseCalled();
 		}
-		
+
 		@Override
 		public void close() {
 			super.close();
 			closeCalled = true;
 		}
-		
+
 		public boolean wasCloseCalled() {
 			return closeCalled;
 		}
-		
+
 		public void resetCloseCalled() {
 			closeCalled = false;
 		}

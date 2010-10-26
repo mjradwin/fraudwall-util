@@ -28,46 +28,25 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
-package com.fraudwall.util;
-
-import java.sql.SQLException;
+package com.fraudwall.util.db;
 
 /**
- * A {@link SQLResultsClosure} that executes a SQL statement and invokes a method
- * on each row of the result set. The
- * {@link #processResult(AnchorResultSet, int)} method must be overridden;
- * this method gets called on each result set row.
+ * A {@link SQLResultsClosure} that executes a SQL statement and ignores
+ * the results.
  *
  * @see SQLResultsClosure
+ * @see SQLResultsProcessorClosure
  * @see SQLResultsListClosure
- * @see SQLIgnoreResultsClosure
  */
-public abstract class SQLResultsProcessorClosure extends SQLResultsClosure<Object> {
-	/**
-	 * Constructs a new {@link SQLResultsProcessorClosure} that runs the query
-	 * specified by the given {@code sql} text.
-	 */
-	public SQLResultsProcessorClosure(String sql) {
+public final class SQLIgnoreResultsClosure extends SQLResultsClosure<Object> {
+	public SQLIgnoreResultsClosure(String sql) {
 		super(sql);
 	}
 
 	@Override
-	public Void exec(AnchorResultSet results) throws SQLException {
-		int count = 0;
-		while (results.next()) {
-			processResult(results, count++);
-		}
+	public Void exec(AnchorResultSet results) {
 		return null;
 	}
-
-	/**
-	 * Method invoked on each row of the query's result set. Prior to this method being
-	 * called, the {@link AnchorResultSet#next()} method will have been called on
-	 * {@code results} and returned a result of {@code true}.
-	 *
-	 * @param rowNum The 0-based row number of the given <code>results</code>.
-	 */
-	protected abstract void processResult(AnchorResultSet results, int rowNum) throws SQLException;
 }
