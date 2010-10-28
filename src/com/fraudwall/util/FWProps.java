@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util;
 
@@ -189,7 +189,8 @@ public class FWProps {
 		this.applicationName = StringUtils.isNotEmpty(applicationName) ? applicationName.toLowerCase() : applicationName;
 		this.customerName = customerName;
 		hostName = Utilities.getCurrentHost();
-		shortCustomerName = StringUtils.isEmpty(customerName) ? customerName : Utilities.firstComponent(customerName);
+		shortCustomerName = StringUtils.isEmpty(customerName) ? customerName :
+			com.fraudwall.util.StringUtils.firstComponent(customerName);
 		allProps = new Properties();
 		ignoreHostProperties = forceProductionHost;
 		ignoreUserProperties = forceProductionHost;
@@ -368,7 +369,7 @@ public class FWProps {
 		addToAllProps(getPropsFromDir(CUSTS_DIR, customerName, applicationName), "cust-app");
 
 		// Set ignoreHostProperties before loading any host specific properties
-		setIgnoreHost(ignoreHostProperties || Utilities.parseBoolean(getProp(IGNORE_HOST_PROPS)));
+		setIgnoreHost(ignoreHostProperties || com.fraudwall.util.StringUtils.parseBoolean(getProp(IGNORE_HOST_PROPS)));
 
 		// <hostName>.properties
 		addToAllProps(getProps(hostName, /*isUser=*/false, /*isHost=*/true), "host");
@@ -387,7 +388,7 @@ public class FWProps {
 		addToAllProps(getPropsFromDir(CUSTS_DIR, customerName, L10N_FILE_NAME), "cust-l10n");
 
 		// Set ignoreUserProperties before loading any user properties
-		setIgnoreUser(ignoreUserProperties || isProductionHost ||  Utilities.parseBoolean(getProp(IGNORE_USER_PROPS)));
+		setIgnoreUser(ignoreUserProperties || isProductionHost ||  com.fraudwall.util.StringUtils.parseBoolean(getProp(IGNORE_USER_PROPS)));
 
 		// <userName>.properties
 		addToAllProps(getPropsFromDir(USERS_DIR, userName, /*isUser=*/true, /*isHost=*/false), "user");
@@ -760,7 +761,7 @@ public class FWProps {
 	 * @see #getBooleanProperty(String)
 	 */
 	public static boolean getBooleanProperty(String optPrefix, String propName) {
-		return Utilities.parseBoolean(getPropVal(optPrefix, propName));
+		return com.fraudwall.util.StringUtils.parseBoolean(getPropVal(optPrefix, propName));
 	}
 
 	/**
@@ -1138,7 +1139,7 @@ public class FWProps {
 		for (String customer : customerNames) {
 			FWProps customerFwprops = newInstance(appName, customer);
 			customerFwprops.initialize();
-			if (Utilities.parseBoolean(customerFwprops.getProp(appName + ".enabled"))) {
+			if (com.fraudwall.util.StringUtils.parseBoolean(customerFwprops.getProp(appName + ".enabled"))) {
 				enabled.add(customer);
 			}
 		}

@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util;
 
@@ -109,6 +109,7 @@ import com.fraudwall.util.net.IpAddressUtilsTest;
 	ShellCommandTest.class,
 	SmartDateParserTest.class,
 	SqlStatementIteratorTest.class,
+	StringUtilsTest.class,
 	TemplateExpanderTest.class,
 	TimeGrainRotatingWriterTest.class,
 	UtilitiesTest.class,

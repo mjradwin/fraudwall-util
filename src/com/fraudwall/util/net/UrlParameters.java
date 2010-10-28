@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util.net;
 
@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.fraudwall.util.Utilities;
+import com.fraudwall.util.StringUtils;
 
 /**
  * Breaks up a URL query string into key/value pairs. Similar in spirit
@@ -58,7 +58,7 @@ public class UrlParameters {
 	/**
 	 * Construct the parameter map.
 	 * @param decode whether to url-decode the parameters
-	 * @see Utilities#decodeURL(String)
+	 * @see StringUtils#decodeURL(String)
 	 */
 	public UrlParameters(String queryString, boolean decode) {
 		map = new HashMap<String,ArrayList<String> >();
@@ -72,8 +72,8 @@ public class UrlParameters {
 					String key = new String(token.substring(0, eq));
 					String val = new String(token.substring(eq+1));
 					if (decode) {
-						key = Utilities.decodeURL(key);
-						val = Utilities.decodeURL(val);
+						key = StringUtils.decodeURL(key);
+						val = StringUtils.decodeURL(val);
 					}
 					ArrayList<String> values;
 					if ((values = map.get(key)) == null) {

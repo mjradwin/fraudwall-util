@@ -57,7 +57,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fraudwall.util.Utilities;
+import com.fraudwall.util.StringUtils;
 import com.fraudwall.util.exc.ArgCheck;
 
 /**
@@ -223,7 +223,7 @@ public class ResultSetMock implements ResultSet {
 
 	public boolean getBoolean(int columnIndex) throws SQLException {
 		String columnVal = getColumnValue(columnIndex);
-		return columnVal == null ? false : Utilities.parseBoolean(columnVal);
+		return columnVal == null ? false : StringUtils.parseBoolean(columnVal);
 	}
 
 	public short getShort(int columnIndex) throws SQLException {

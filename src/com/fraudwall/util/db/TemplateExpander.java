@@ -46,7 +46,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.fraudwall.util.Utilities;
+import com.fraudwall.util.StringUtils;
 import com.fraudwall.util.io.IOUtils;
 
 /**
@@ -137,7 +137,7 @@ public class TemplateExpander {
 		BufferedReader reader = new BufferedReader(new FileReader(templateFile));
 		try {
 			String templateName = templateFile.getName();
-			String suffix = Utilities.lastComponent(templateName);
+			String suffix = StringUtils.lastComponent(templateName);
 			File expandedFile = File.createTempFile(templateName, "." + suffix);
 			BufferedWriter writer = new BufferedWriter(new FileWriter(expandedFile));
 			try {

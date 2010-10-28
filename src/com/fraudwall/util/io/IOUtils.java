@@ -60,6 +60,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.fraudwall.util.FWProps;
+import com.fraudwall.util.StringUtils;
 import com.fraudwall.util.Utilities;
 import com.fraudwall.util.exc.AnchorFatalError;
 import com.fraudwall.util.exc.ArgCheck;
@@ -168,7 +169,7 @@ public abstract class IOUtils {
 	 * or creating/writing the uncompressed output file.
 	 */
 	public static File gunzip(File inFile) throws IOException {
-		return gunzip(inFile, new File(inFile.getParent(), Utilities.chopLastComponent(inFile.getName())));
+		return gunzip(inFile, new File(inFile.getParent(), StringUtils.chopLastComponent(inFile.getName())));
 	}
 
 	/**
