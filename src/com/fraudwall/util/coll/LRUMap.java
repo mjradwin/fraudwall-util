@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util.coll;
 
@@ -54,7 +54,7 @@ import java.util.Set;
  * @param <V> The type of values stored in the map.
  * @author Allan Heydon
  */
-public class LRUMap<K,V> extends AbstractMap<K,V> implements ObjectCache<K,V> {
+public class LRUMap<K,V> extends AbstractMap<K,V> {
 	/** Upper bound on the number of elements in the cache. */
 	private final int maxSize;
 
@@ -279,12 +279,5 @@ public class LRUMap<K,V> extends AbstractMap<K,V> implements ObjectCache<K,V> {
 		public String toString() {
 			return key + "=" + value;
 		}
-	}
-
-	/**
-	 * There is no need to flush anything to disk, so this is a no-op.
-	 */
-	public void finish() {
-		// no-op
 	}
 }

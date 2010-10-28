@@ -40,7 +40,7 @@ import java.util.Set;
 import org.apache.commons.lang.time.DateUtils;
 
 
-public class ExpiringLRUMap<K,V> extends AbstractMap<K,V> implements ObjectCache<K,V> {
+public class ExpiringLRUMap<K,V> extends AbstractMap<K,V> {
 	private static class Wrapper<V> {
 		public final long ts;
 		public final V val;
@@ -143,12 +143,5 @@ public class ExpiringLRUMap<K,V> extends AbstractMap<K,V> implements ObjectCache
 			}
 		}
 		return set;
-	}
-
-	/**
-	 * There is no need to flush anything to disk, so this is a no-op.
-	 */
-	public void finish() {
-		// no-op
 	}
 }
