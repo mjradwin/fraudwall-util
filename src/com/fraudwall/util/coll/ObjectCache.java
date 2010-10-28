@@ -30,10 +30,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-package com.fraudwall.util;
+package com.fraudwall.util.coll;
 
 import java.util.Map;
 
-public interface FWObjectCache<K,V> extends Map<K,V> {
+public interface ObjectCache<K,V> extends Map<K,V> {
 	public void finish() throws InterruptedException;
 }

@@ -39,9 +39,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import com.fraudwall.util.FWObjectCache;
 
-public class ExpiringLRUMap<K,V> extends AbstractMap<K,V> implements FWObjectCache<K,V> {
+public class ExpiringLRUMap<K,V> extends AbstractMap<K,V> implements ObjectCache<K,V> {
 	private static class Wrapper<V> {
 		public final long ts;
 		public final V val;

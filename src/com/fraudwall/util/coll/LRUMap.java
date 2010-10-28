@@ -38,7 +38,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.fraudwall.util.FWObjectCache;
 
 /**
  * A bounded cache mapping keys to values that evicts the key/value mapping
@@ -55,7 +54,7 @@ import com.fraudwall.util.FWObjectCache;
  * @param <V> The type of values stored in the map.
  * @author Allan Heydon
  */
-public class LRUMap<K,V> extends AbstractMap<K,V> implements FWObjectCache<K,V> {
+public class LRUMap<K,V> extends AbstractMap<K,V> implements ObjectCache<K,V> {
 	/** Upper bound on the number of elements in the cache. */
 	private final int maxSize;
 
