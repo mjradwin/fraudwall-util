@@ -47,7 +47,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.fraudwall.util.FWProps;
-import com.fraudwall.util.Require;
+import com.fraudwall.util.exc.Require;
 import com.mysql.jdbc.ConnectionImpl;
 
 /**

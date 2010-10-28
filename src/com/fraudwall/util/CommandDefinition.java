@@ -39,6 +39,9 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Options;
 
+import com.fraudwall.util.exc.IllegalUsageException;
+import com.fraudwall.util.exc.Require;
+
 /**
  * Simple wrapper around some Apache Commons CLI (command-line interface) classes.
  */

@@ -44,8 +44,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.fraudwall.util.AnchorFatalError;
 import com.fraudwall.util.FWProps;
+import com.fraudwall.util.exc.AnchorFatalError;
 
 /**
  * Utilities for creating MySQL database connections based on Anchor

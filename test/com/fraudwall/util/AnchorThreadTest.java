@@ -32,6 +32,8 @@
  */
 package com.fraudwall.util;
 
+import com.fraudwall.util.exc.AnchorFatalError;
+
 
 public class AnchorThreadTest extends AbstractAnchorTest {
 

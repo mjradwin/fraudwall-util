@@ -42,8 +42,8 @@ import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 
 import com.fraudwall.util.AbstractPropsTest;
-import com.fraudwall.util.AnchorFatalError;
 import com.fraudwall.util.FWPropsTest;
+import com.fraudwall.util.exc.AnchorFatalError;
 
 public class IOUtilsTest extends AbstractPropsTest {
 

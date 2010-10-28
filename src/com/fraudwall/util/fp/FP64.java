@@ -38,7 +38,7 @@ import java.io.Serializable;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.fraudwall.util.ArgCheck;
+import com.fraudwall.util.exc.ArgCheck;
 
 /**
  * A special kind of 64-bit checksum, called a <em>fingerprint</em>. This

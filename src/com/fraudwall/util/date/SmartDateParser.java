@@ -46,8 +46,8 @@ import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.fraudwall.util.AnchorFatalError;
-import com.fraudwall.util.ArgCheck;
+import com.fraudwall.util.exc.AnchorFatalError;
+import com.fraudwall.util.exc.ArgCheck;
 
 /**
  * Parses date and date/time strings in a variety of common formats.

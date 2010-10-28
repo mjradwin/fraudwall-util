@@ -32,6 +32,8 @@
  */
 package com.fraudwall.util;
 
+import com.fraudwall.util.exc.ArgCheck;
+
 /**
  * Repository of basic computational utility functions
  */

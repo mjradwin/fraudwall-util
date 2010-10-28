@@ -74,6 +74,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.fraudwall.util.exc.ArgCheck;
+import com.fraudwall.util.exc.ArgCheckTest;
 import com.fraudwall.util.io.AnchorLineNumberReader;
 import com.fraudwall.util.io.IOUtils;
 

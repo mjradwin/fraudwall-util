@@ -50,9 +50,9 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.time.DateUtils;
 
 import com.fraudwall.util.AbstractPropsTest;
-import com.fraudwall.util.AnchorFatalError;
 import com.fraudwall.util.FWPropsTest;
 import com.fraudwall.util.db.AnchorResultSet;
+import com.fraudwall.util.exc.AnchorFatalError;
 
 
 /**

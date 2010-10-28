@@ -56,6 +56,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fraudwall.util.exc.AnchorFatalError;
+import com.fraudwall.util.exc.IllegalUsageException;
+import com.fraudwall.util.exc.Require;
 import com.fraudwall.util.io.AnchorLineNumberReader;
 import com.fraudwall.util.io.IOUtils;
 

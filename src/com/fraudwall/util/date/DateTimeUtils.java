@@ -45,7 +45,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 
-import com.fraudwall.util.AnchorFatalError;
+import com.fraudwall.util.exc.AnchorFatalError;
 
 /**
  * Defines various utility methods useful for parsing, formatting,

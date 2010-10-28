@@ -37,7 +37,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.Iterator;
 
-import com.fraudwall.util.Require;
+import com.fraudwall.util.exc.Require;
 
 /**
  * Provides an {@link Iterator} on an underlying {@link Reader}

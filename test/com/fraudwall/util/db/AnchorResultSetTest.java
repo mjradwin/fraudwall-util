@@ -39,7 +39,6 @@ import java.sql.Statement;
 import java.text.ParseException;
 
 import com.fraudwall.util.AbstractPropsTest;
-import com.fraudwall.util.ResultSetMock;
 import com.fraudwall.util.Utilities;
 import com.fraudwall.util.date.AnchorDateFormat;
 import com.fraudwall.util.db.AnchorResultSet;

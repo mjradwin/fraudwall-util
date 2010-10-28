@@ -39,8 +39,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 import com.fraudwall.util.AnchorThread;
-import com.fraudwall.util.ArgCheck;
-import com.fraudwall.util.Require;
+import com.fraudwall.util.exc.ArgCheck;
+import com.fraudwall.util.exc.Require;
 
 /**
  * Buffered reader that forks a separate thread to read lines from the backing

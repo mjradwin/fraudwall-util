@@ -63,6 +63,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import com.fraudwall.util.date.SmartDateParser;
+import com.fraudwall.util.exc.ArgCheck;
 
 public class XmlUtilities {
 

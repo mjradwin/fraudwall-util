@@ -36,7 +36,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
-import com.fraudwall.util.ArgCheck;
+import com.fraudwall.util.exc.ArgCheck;
 
 
 /**

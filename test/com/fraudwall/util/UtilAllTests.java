@@ -36,6 +36,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.fraudwall.util.coll.AnchorCollectionUtilsTest;
+import com.fraudwall.util.coll.DecayVariableCollectionTest;
+import com.fraudwall.util.coll.EstCountTest;
+import com.fraudwall.util.coll.ExpiringLRUMapTest;
+import com.fraudwall.util.coll.IndexedPriorityQueueTest;
+import com.fraudwall.util.coll.LRUMapTest;
+import com.fraudwall.util.coll.LRUSetTest;
 import com.fraudwall.util.date.DateTimeUtilsTest;
 import com.fraudwall.util.date.SmartDateParserTest;
 import com.fraudwall.util.db.AnchorResultSetTest;
@@ -43,6 +50,9 @@ import com.fraudwall.util.db.ConnectionPoolTest;
 import com.fraudwall.util.db.DBConnectionUtilsTest;
 import com.fraudwall.util.db.DBUtilsTest;
 import com.fraudwall.util.db.SqlStatementIteratorTest;
+import com.fraudwall.util.db.TemplateExpanderTest;
+import com.fraudwall.util.exc.ArgCheckTest;
+import com.fraudwall.util.exc.RequireTest;
 import com.fraudwall.util.fp.FP64SaveInputTest;
 import com.fraudwall.util.fp.FP64Test;
 import com.fraudwall.util.io.AnchorCsvWriterTest;
@@ -50,6 +60,12 @@ import com.fraudwall.util.io.AnchorLineNumberReaderTest;
 import com.fraudwall.util.io.IOUtilsTest;
 import com.fraudwall.util.io.MultiThreadedLineNumberReaderTest;
 import com.fraudwall.util.io.TimeGrainRotatingWriterTest;
+import com.fraudwall.util.net.BrowscapUserAgentTest;
+import com.fraudwall.util.net.CanonicalUrlTest;
+import com.fraudwall.util.net.EmailUtilsTest;
+import com.fraudwall.util.net.HttpQueryTest;
+import com.fraudwall.util.net.IpAddressRangeTest;
+import com.fraudwall.util.net.IpAddressUtilsTest;
 
 @RunWith(Suite.class)
 @SuiteClasses( {

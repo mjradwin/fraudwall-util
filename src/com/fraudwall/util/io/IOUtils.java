@@ -59,10 +59,10 @@ import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.fraudwall.util.AnchorFatalError;
-import com.fraudwall.util.ArgCheck;
 import com.fraudwall.util.FWProps;
 import com.fraudwall.util.Utilities;
+import com.fraudwall.util.exc.AnchorFatalError;
+import com.fraudwall.util.exc.ArgCheck;
 
 /**
  * Defines various static I/O utility methods.

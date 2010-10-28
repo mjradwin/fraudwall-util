@@ -40,6 +40,8 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fraudwall.util.exc.IllegalUsageException;
+
 /**
  * Runs a particular application for a particular customer, but only if
  * invoked on a machine whose configuration properties indicate that the

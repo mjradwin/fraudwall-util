@@ -35,7 +35,7 @@ package com.fraudwall.util.date;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
-import com.fraudwall.util.ArgCheck;
+import com.fraudwall.util.exc.ArgCheck;
 
 /**
  * Simple sub-class of {@link SimpleDateFormat} that always does strict

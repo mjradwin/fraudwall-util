@@ -43,6 +43,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fraudwall.util.exc.AnchorFatalError;
+import com.fraudwall.util.exc.ArgCheck;
+
 /**
  * Class for running command from the system's shell.  For simply running a command:
  *  {@link #executeCommand(String...)} or {@link #executeCommand(Map, String...)}

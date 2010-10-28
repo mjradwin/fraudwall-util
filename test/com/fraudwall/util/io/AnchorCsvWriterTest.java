@@ -42,7 +42,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 import com.fraudwall.util.AbstractAnchorTest;
-import com.fraudwall.util.AnchorFatalError;
+import com.fraudwall.util.exc.AnchorFatalError;
 
 /**
  * Tests the {@link AnchorCsvWriter} implementation.

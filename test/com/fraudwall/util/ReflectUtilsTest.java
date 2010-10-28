@@ -28,7 +28,7 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 package com.fraudwall.util;
 
@@ -52,12 +52,12 @@ public class ReflectUtilsTest extends AbstractAnchorTest {
 
 	public void testNewInstanceNoArgConstructorThrowsIfClassHasNoNoArgConstructor() {
 		checkNewInstanceNoArgConstructorThrows(
-			"com.fraudwall.util.IllegalUsageException", InstantiationException.class);
+			"com.fraudwall.util.exc.IllegalUsageException", InstantiationException.class);
 	}
 
 	public void testNewInstanceNoArgConstructorThrowsIfClassHasPrivateNoArgConstructor() {
 		checkNewInstanceNoArgConstructorThrows(
-			"com.fraudwall.util.ArgCheckTest", IllegalAccessException.class);
+			"com.fraudwall.util.exc.ArgCheckTest", IllegalAccessException.class);
 	}
 
 	private void checkNewInstanceNoArgConstructorThrows(
@@ -92,13 +92,13 @@ public class ReflectUtilsTest extends AbstractAnchorTest {
 
 	public void testNewInstanceOneArgConstructorThrowsIfIllegalArgumentException() {
 		checkNewInstanceOneArgConstructorThrows(
-			"com.fraudwall.util.ArgCheckTest", String.class, new Integer(0),
+			"com.fraudwall.util.exc.ArgCheckTest", String.class, new Integer(0),
 			IllegalArgumentException.class);
 	}
 
 	public void testNewInstanceOneArgConstructorThrowsIfInvocationTargetException() {
 		checkNewInstanceOneArgConstructorThrows(
-			"com.fraudwall.util.ArgCheckTest", Integer.class, null,
+			"com.fraudwall.util.exc.ArgCheckTest", Integer.class, null,
 			InvocationTargetException.class);
 	}
 
@@ -141,7 +141,7 @@ public class ReflectUtilsTest extends AbstractAnchorTest {
 
 	public void testNewInstanceMultiArgConstructorThrowsIfIllegalArgumentException() {
 		checkNewInstanceMultiArgConstructorThrows(
-			"com.fraudwall.util.ArgCheckTest",
+			"com.fraudwall.util.exc.ArgCheckTest",
 			new Class<?>[] { String.class, Integer.class },
 			new Object[] { new Integer(0), new Integer(1) },
 			IllegalArgumentException.class);
@@ -149,7 +149,7 @@ public class ReflectUtilsTest extends AbstractAnchorTest {
 
 	public void testNewInstanceMultiArgConstructorThrowsIfInvocationTargetException() {
 		checkNewInstanceMultiArgConstructorThrows(
-			"com.fraudwall.util.ArgCheckTest",
+			"com.fraudwall.util.exc.ArgCheckTest",
 			new Class<?>[] { String.class, Integer.class },
 			new Object[] { "ArgCheckTest", null },
 			InvocationTargetException.class);

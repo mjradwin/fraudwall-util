@@ -42,8 +42,8 @@ import java.io.Writer;
 
 import org.apache.commons.lang.ArrayUtils;
 
-import com.fraudwall.util.AnchorFatalError;
-import com.fraudwall.util.ArgCheck;
+import com.fraudwall.util.exc.AnchorFatalError;
+import com.fraudwall.util.exc.ArgCheck;
 
 /**
  * Simple class for writing to CSV files based on the CsvWriter implementation,
